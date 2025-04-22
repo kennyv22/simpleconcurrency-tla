@@ -12,6 +12,8 @@ CONSTANTS
     ImplementProgress,
     ImplementLocking
 
+    
+
 VARIABLES shared, state, count, local, lock
 
 vars == << shared, state, count, local, lock >>
@@ -91,9 +93,10 @@ Progress == ImplementProgress =>
 
 Spec == Init /\ [][Next]_vars /\ Progress
 
-Correctness == <>
-  IF RequireCorrectness
-  THEN shared = K * N /\ IsUnlocked \* correctness when each increment is atomic
-  ELSE TRUE \* TODO minimum result when increments can overlap
+Correctness == <>([](shared >= 5))
+\*  IF RequireCorrectness
+ \* THEN shared = K * N /\ IsUnlocked \* correctness when each increment is atomic
+ \* ELSE TRUE \* TODO minimum result when increments can overlap
+
 
 ====
